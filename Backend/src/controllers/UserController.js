@@ -48,7 +48,7 @@ export const Login = async (req, res) => {
         const role = user[0].role;
 
         const accessToken = jwt.sign({ userId, name, email, role }, process.env.ACCESS_TOKEN_SECRET, {
-            expiresIn: '10m'
+            expiresIn: '15s'
         });
         const refreshToken = jwt.sign({ userId, name, email, role }, process.env.REFRESH_TOKEN_SECRET, {
             expiresIn: '1d'
@@ -108,12 +108,12 @@ export const updateUser = async (req, res) => {
 
     try {
         if (userFromToken.role !== 0 && parseInt(userFromToken.id) !== parseInt(id)) {
-            return res.status(403).json({ msg: 'You do not have permission to edit this user.' });
+            return res.status(403).json({ msg: 'Bạn không có quyền chỉnh sửa người dùng này.' });
         }
 
         const user = await Users.findByPk(id);
         if (!user) {
-            return res.status(404).json({ msg: 'User not found with this ID.' });
+            return res.status(404).json({ msg: 'Không tìm thấy người dùng có ID này.' });
         }
 
         user.name = name || user.name;
@@ -125,10 +125,10 @@ export const updateUser = async (req, res) => {
         }
 
         await user.save();
-        res.json({ msg: 'User updated successfully', user });
+        res.json({ msg: 'Người dùng đã cập nhật thành công', user });
     } catch (error) {
-        console.error("Error updating user:", error);
-        res.status(500).json({ msg: 'Error updating user', error });
+        console.error("Lỗi cập nhật người dùng:", error);
+        res.status(500).json({ msg: 'Lỗi cập nhật người dùng', error });
     }
 };
 
@@ -145,7 +145,39 @@ export const deleteUser = async (req, res) => {
     }
 };
 
+export const updateUserProfile = async (req, res) => {
+    try {
+        const { id } = req.params; 
+        const { name, email, password } = req.body;
 
+        const userIdFromToken = req.user.userId;
+
+        if (parseInt(userIdFromToken) !== parseInt(id)) {
+            return res.status(403).json({ msg: "Bạn chỉ có thể chỉnh sửa thông tin tài khoản của mình." });
+        }
+
+        const user = await Users.findByPk(id); 
+        if (!user) {
+            return res.status(404).json({ msg: "Không tìm thấy người dùng" });
+        }
+
+        let hashedPassword = user.password;
+        if (password) {
+            hashedPassword = await bcrypt.hash(password, 12);
+        }
+
+        user.name = name || user.name;
+        user.email = email || user.email;
+        user.password = hashedPassword;
+
+        await user.save();
+
+        res.status(200).json({ msg: "Cập nhật thông tin thành công", user });
+    } catch (error) {
+        console.error("Lỗi khi cập nhật thông tin người dùng:", error);
+        res.status(500).json({ msg: "Có lỗi xảy ra" });
+    }
+};
 
 
 
