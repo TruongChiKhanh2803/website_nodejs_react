@@ -1,0 +1,33 @@
+# GET http://localhost:6868/users
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsIm5hbWUiOiJ1c2VyMCIsImVtYWlsIjoidXNlcjBAZ21haWwuY29tIiwiaWF0IjoxNzMxODE3Mzc5LCJleHAiOjE3MzE5MDM3Nzl9.ZpSBBFUAN18mZFJQD03EZeOqkunzjJC2Dj9ZhWC9BCA
+
+
+# --------------------------------
+
+# POST http://localhost:6868/users
+# Content-Type: application/json
+
+# {
+#     "name":"user2",
+#     "email": "user2@gmail.com",
+#     "password": "123456",
+#     "confPassword": "123456"
+# }
+
+# POST http://localhost:6868/login
+# Content-Type: application/json
+
+
+# {
+#     "email": "user0@gmail.com",
+#     "password": "123456"
+# }
+
+
+
+
+# GET http://localhost:6868/token
+
+
+DELETE http://localhost:6868/logout
+

@@ -1,11 +1,19 @@
 import express from "express";
-import getTestPage from "../controllers/testController";
+import { getUsers, Register, Login, Logout, getUserById, updateUser, deleteUser } from "../controllers/UserController.js";
+import { verifyToken } from "../middlewares/VerityToken.js";
+import { refreshToken } from "../controllers/RefreshToken.js";
 
-const router = express.Router()
-const initWebRoute = (app) => {
+const router = express.Router();
 
-    router.get('/test', getTestPage)
+router.post('/users', Register);
+router.post('/login', Login);
+router.delete('/logout', Logout);
 
-    return app.use('/', router)
-}
-export default initWebRoute
+router.get('/token', refreshToken);
+
+router.get('/users', verifyToken, getUsers);
+router.get('/users/:id', getUserById);
+router.put('/users/edit/:id', verifyToken, updateUser);
+router.delete('/users/:id', verifyToken, deleteUser);
+
+export default router;
