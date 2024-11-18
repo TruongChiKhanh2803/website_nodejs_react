@@ -14,6 +14,11 @@ import PrivateRoute from './components/Auth/PrivateRoute';
 import Home from './components/Client/Home';
 import EditProfile from './components/Client/EditProfile';
 
+
+import CategoryList from './components/Category/Category';
+import CreateCategory from './components/Category/CreateCategory';
+import EditCategory from './components/Category/EditCategory';
+
 const App = () => {
   return (
     <BrowserRouter>
@@ -57,6 +62,33 @@ const App = () => {
         />
 
         <Route path="users/editprofile/:id" element={<EditProfile />} />
+
+
+
+        <Route
+          path="/categories"
+          element={
+            <PrivateRoute requiredRole={0}>
+              <><Navbar /><CategoryList /></>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/categories/add"
+          element={
+            <PrivateRoute requiredRole={0}>
+              <CreateCategory />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/categories/edit/:id"
+          element={
+            <PrivateRoute requiredRole={0}>
+              <EditCategory />
+            </PrivateRoute>
+          }
+        />
 
 
 

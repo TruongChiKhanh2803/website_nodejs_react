@@ -33,30 +33,26 @@ const Navbar = () => {
                 </div>
 
                 <div id="navbarBasicExample" className="navbar-menu">
+
                     <div className="navbar-start">
                         <a href='/dashboard' className="navbar-item">
                             Dashboard
                         </a>
-                    </div>
-
-                    <div className="navbar-start">
-                        <a href='/danhmuc' className="navbar-item">
-                            Danh mục
-                        </a>
-                    </div> <div className="navbar-start">
-                        <a href='/sanpham' className="navbar-item">
-                            Sản phẩm
-                        </a>
-                    </div>
-                    <div className="navbar-start">
-                        <a href='/donhang' className="navbar-item">
-                            Đơn hàng
-                        </a>
-                    </div> <div className="navbar-start">
                         <a href='/users' className="navbar-item">
                             Người dùng
                         </a>
+                        <a href='/categories' className="navbar-item">
+                            Danh mục
+                        </a>
+                        <a href='/sanpham' className="navbar-item">
+                            Sản phẩm
+                        </a>
+                        <a href='/donhang' className="navbar-item">
+                            Đơn hàng
+                        </a>
                     </div>
+
+                 
 
                     <div className="navbar-end">
                         <div className="navbar-item">
