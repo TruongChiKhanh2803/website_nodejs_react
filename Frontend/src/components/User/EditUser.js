@@ -36,7 +36,7 @@ const EditUser = () => {
             const updatedData = {
                 name,
                 email,
-                password: password || undefined, 
+                password: password || undefined,
             };
 
             await axios.put(`http://localhost:6868/users/edit/${id}`, updatedData, {
