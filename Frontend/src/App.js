@@ -23,6 +23,7 @@ import ProductList from './components/Product/ProductList';
 import CreateProduct from './components/Product/ProductAdd';
 import EditProduct from './components/Product/ProductEdit';
 import ProductPage from './components/Client/ProductPage';
+import ProductDetail from './components/Client/ProductDetail';
 
 
 import Footer from './components/Client/FooterUser';
@@ -35,8 +36,9 @@ const App = () => {
         <Route path="/" element={<><NavbarUser /><Home /></>} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="users/editprofile/:id" element={<EditProfile />} />
         <Route path="/productpage" element={<><NavbarUser /><ProductPage /><Footer /></>} />
-
+        <Route path="/product/:productId" element={<><NavbarUser /><ProductDetail /><Footer /></>} />
 
 
         <Route
@@ -72,7 +74,6 @@ const App = () => {
           }
         />
 
-        <Route path="users/editprofile/:id" element={<EditProfile />} />
 
 
 
@@ -127,6 +128,8 @@ const App = () => {
             </PrivateRoute>
           }
         />
+
+
       </Routes>
     </BrowserRouter>
   );

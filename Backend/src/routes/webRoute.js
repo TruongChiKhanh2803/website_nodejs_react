@@ -30,10 +30,9 @@ router.delete('/categories/:id', verifyToken, deleteCategory);
 
 
 router.get('/products', getProducts);
-router.post('/products', createProduct); 
+router.post('/products', createProduct);
 router.get('/products/:id', getProductById);
-router.put('/products/edit/:id', verifyToken, updateProduct); 
+router.put('/products/edit/:id', verifyToken, updateProduct);
 router.delete('/products/:id', verifyToken, deleteProduct);
-
 
 export default router;

@@ -70,10 +70,16 @@ const NavbarUser = () => {
         navigate(`/users/editprofile/${decodedToken.userId}`);
     };
 
+    // const handleCategoryClick = (categoryId) => {
+    //     navigate(`/categories/${categoryId}`);
+    //     setIsDropdownOpen(false);
+    // };
+
     const handleCategoryClick = (categoryId) => {
-        navigate(`/categories/${categoryId}`);
-        setIsDropdownOpen(false);
+        // Chuyển hướng đến trang ProductPage và truyền categoryId vào URL
+        navigate(`/productpage?categoryId=${categoryId}`);
     };
+
 
     return (
         <nav className="navbar is-light" role="navigation" aria-label="main navigation">
