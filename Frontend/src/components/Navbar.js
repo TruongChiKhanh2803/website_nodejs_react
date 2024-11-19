@@ -44,7 +44,7 @@ const Navbar = () => {
                         <a href='/categories' className="navbar-item">
                             Danh mục
                         </a>
-                        <a href='/sanpham' className="navbar-item">
+                        <a href='/products' className="navbar-item">
                             Sản phẩm
                         </a>
                         <a href='/donhang' className="navbar-item">
@@ -52,7 +52,7 @@ const Navbar = () => {
                         </a>
                     </div>
 
-                 
+
 
                     <div className="navbar-end">
                         <div className="navbar-item">

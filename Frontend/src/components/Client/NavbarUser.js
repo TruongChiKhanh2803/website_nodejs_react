@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
+// import ShopHome from './ShopHome';
 
 const NavbarUser = () => {
     const [name, setName] = useState('');
@@ -78,7 +79,7 @@ const NavbarUser = () => {
         <nav className="navbar is-light" role="navigation" aria-label="main navigation">
             <div className="container">
                 <div className="navbar-brand">
-                    <a className="navbar-item" href="#">
+                    <a className="navbar-item" href="/">
                         <img src="#" alt="LOGO" width="112" height="28" />
                     </a>
                 </div>
@@ -104,12 +105,16 @@ const NavbarUser = () => {
                                 </div>
                             )}
                         </div>
-                        <a href='/sanpham' className="navbar-item">
+
+                        <a href='/productpage' className="navbar-item">
                             Sản phẩm
                         </a>
+
+
                         <a className="navbar-item" onClick={handleOrderHistoryClick}>
                             Lịch sử mua hàng
                         </a>
+
                     </div>
 
                     <div className="navbar-end">

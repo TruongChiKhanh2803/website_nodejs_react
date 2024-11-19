@@ -19,6 +19,14 @@ import CategoryList from './components/Category/Category';
 import CreateCategory from './components/Category/CreateCategory';
 import EditCategory from './components/Category/EditCategory';
 
+import ProductList from './components/Product/ProductList';
+import CreateProduct from './components/Product/ProductAdd';
+import EditProduct from './components/Product/ProductEdit';
+import ProductPage from './components/Client/ProductPage';
+
+
+import Footer from './components/Client/FooterUser';
+
 const App = () => {
   return (
     <BrowserRouter>
@@ -27,7 +35,9 @@ const App = () => {
         <Route path="/" element={<><NavbarUser /><Home /></>} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        {/* <Route path="/home" element={<><NavbarUser /><Home /></>} /> */}
+        <Route path="/productpage" element={<><NavbarUser /><ProductPage /><Footer /></>} />
+
+
 
         <Route
           path="/dashboard"
@@ -93,6 +103,30 @@ const App = () => {
 
 
 
+        <Route
+          path="/products"
+          element={
+            <PrivateRoute requiredRole={0}>
+              <><Navbar /><ProductList /></>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/products/add"
+          element={
+            <PrivateRoute requiredRole={0}>
+              <CreateProduct />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/products/edit/:id"
+          element={
+            <PrivateRoute requiredRole={0}>
+              <EditProduct />
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );
@@ -106,33 +140,5 @@ export default App;
 
 
 
-
-
-// import React from 'react';
-// import { BrowserRouter, Route, Routes } from "react-router-dom";
-
-// import Login from "./components/Login";
-// import Register from "./components/Register";
-// import Navbar from "./components/Navbar";
-// import Dashboard from './components/Dashboard';
-// import EditUser from './components/EditUser';
-
-
-// const App = () => {
-//   return (
-//     <BrowserRouter>
-
-//       <Routes>
-//         <Route path="/" element={<Login />} />
-//         <Route path="/register" element={<Register />} />
-//         <Route path="/dashboard" element={<><Navbar /><Dashboard /></>} />
-//         <Route path="/users/edit/:id" element={<EditUser />} />
-//       </Routes>
-
-//     </BrowserRouter>
-//   );
-// };
-
-// export default App;
 
 
