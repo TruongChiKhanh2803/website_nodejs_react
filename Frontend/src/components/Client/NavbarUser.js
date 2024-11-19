@@ -41,7 +41,7 @@ const NavbarUser = () => {
     const handleOrderHistoryClick = () => {
         const token = localStorage.getItem('accessToken');
         if (token) {
-            navigate('/lichsumuahang');
+            navigate('/order');
         } else {
             navigate('/login');
         }
@@ -78,6 +78,10 @@ const NavbarUser = () => {
     const handleCategoryClick = (categoryId) => {
         // Chuyển hướng đến trang ProductPage và truyền categoryId vào URL
         navigate(`/productpage?categoryId=${categoryId}`);
+    };
+
+    const navigateToCart = () => {
+        navigate('/cart');
     };
 
 
@@ -121,6 +125,10 @@ const NavbarUser = () => {
                             Lịch sử mua hàng
                         </a>
 
+
+                        <a className="navbar-item" onClick={navigateToCart}>
+                            Giỏ hàng
+                        </a>
                     </div>
 
                     <div className="navbar-end">

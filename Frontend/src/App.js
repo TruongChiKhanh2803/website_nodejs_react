@@ -24,6 +24,8 @@ import CreateProduct from './components/Product/ProductAdd';
 import EditProduct from './components/Product/ProductEdit';
 import ProductPage from './components/Client/ProductPage';
 import ProductDetail from './components/Client/ProductDetail';
+import Cart from './components/Client/Cart';
+import Order from './components/Client/Order';
 
 
 import Footer from './components/Client/FooterUser';
@@ -40,6 +42,8 @@ const App = () => {
         <Route path="/productpage" element={<><NavbarUser /><ProductPage /><Footer /></>} />
         <Route path="/product/:productId" element={<><NavbarUser /><ProductDetail /><Footer /></>} />
 
+        <Route path="/cart" element={<><NavbarUser /><Cart /><Footer /></>} />
+        <Route path="/order" element={<><NavbarUser /><Order /><Footer /></>} />
 
         <Route
           path="/dashboard"

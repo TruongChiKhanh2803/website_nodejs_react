@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 19, 2024 at 04:58 AM
+-- Generation Time: Nov 19, 2024 at 05:57 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.3.6
 
@@ -103,7 +103,7 @@ INSERT INTO `products` (`id`, `name`, `description`, `price`, `stock`, `category
 (3, 'Samsung Galaxy S24 Ultra 5G', 'Điện thoại Samsung Galaxy S24 Ultra 5G 12GB/512GB', 33490000, 99, 7, '2024-11-19 03:34:34', '2024-11-19 04:53:06'),
 (4, 'iPhone 16 Pro Max', 'Điện thoại iPhone 16 Pro Max 256GB', 34490000, 99, 4, '2024-11-19 03:39:03', '2024-11-19 04:53:54'),
 (5, 'iPhone 15 Pro Max', 'Điện thoại iPhone 15 Pro Max 256GB', 29590000, 99, 4, '2024-11-19 03:39:16', '2024-11-19 04:54:30'),
-(7, 'Xiaomi 14 Ultra 5G', 'Điện thoại Xiaomi 14 Ultra 5G 16GB/512GB', 29990000, 99, 9, '2024-11-19 04:55:39', '2024-11-19 04:55:39');
+(7, 'Xiaomi 14 Ultra 5G', 'Điện thoại Xiaomi 14 Ultra 5G 16GB/512GB\n\n\n    Hệ điều hành:\n    Android 14\n    Chip xử lý (CPU):\n    Snapdragon 8 Gen 3 8 nhân\n    Tốc độ CPU:\n    1 nhân 3.3 GHz, 3 nhân 3.2 GHz, 2 nhân 3 GHz & 2 nhân 2.3 GHz\n    Chip đồ họa (GPU):\n    Adreno 750\n    RAM:\n    16 GB\n    Dung lượng lưu trữ:\n    512 GB\n    Dung lượng còn lại (khả dụng) khoảng:\n    475 GB\n    Danh bạ:\n    Không giới hạn\n', 29990000, 99, 9, '2024-11-19 04:55:39', '2024-11-19 05:07:59');
 
 -- --------------------------------------------------------
 
