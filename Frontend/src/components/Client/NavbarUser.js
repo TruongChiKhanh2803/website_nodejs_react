@@ -1,99 +1,3 @@
-// import React, { useState, useEffect } from 'react';
-// import axios from 'axios';
-// import { useNavigate } from "react-router-dom";
-// import { jwtDecode } from 'jwt-decode';
-
-// const NavbarUser = () => {
-//     const [name, setName] = useState('');
-//     const navigate = useNavigate();
-
-//     useEffect(() => {
-//         const token = localStorage.getItem('accessToken');
-//         if (!token) {
-//             navigate("/login");
-//             return;
-//         }
-
-//         try {
-//             const decodedToken = jwtDecode(token);
-//             setName(decodedToken.name);
-//         } catch (error) {
-//             console.error("Invalid token:", error);
-//             navigate("/login");
-//         }
-//     }, [navigate]);
-
-//     const Logout = async () => {
-//         try {
-//             await axios.delete('http://localhost:6868/logout', { withCredentials: true });
-//             localStorage.removeItem('accessToken');
-//             navigate("/login");
-//         } catch (error) {
-//             console.error("Logout error:", error.response?.data || error.message);
-//         }
-//     };
-
-//     const navigateToProfile = () => {
-//         const token = localStorage.getItem('accessToken');
-//         if (!token) {
-//             navigate("/login");
-//             return;
-//         }
-
-//         const decodedToken = jwtDecode(token);
-//         navigate(`/users/editprofile/${decodedToken.userId}`);
-//     };
-
-//     return (
-//         <nav className="navbar is-light" role="navigation" aria-label="main navigation">
-//             <div className='container'>
-//                 <div className="navbar-brand">
-//                     <a className="navbar-item" href="#">
-//                         <img src="#" alt="LOGO" width="112" height="28" />
-//                     </a>
-//                 </div>
-
-//                 <div id="navbarBasicExample" className="navbar-menu">
-//                     <div className="navbar-start">
-//                         <a href='/danhmuc' className="navbar-item">
-//                             Danh mục
-//                         </a>
-//                         <a href='/sanpham' className="navbar-item">
-//                             Sản phẩm
-//                         </a>
-//                         <a href='/donhang' className="navbar-item">
-//                             Lịch sử mua hàng
-//                         </a>
-//                     </div>
-
-//                     <div className="navbar-end">
-//                         <div className="navbar-item">
-//                             <h1 className="title is-5" style={{ color: 'blue' }}>
-//                                 Xin chào, {name}!
-//                             </h1>
-//                         </div>
-
-//                         <div className="navbar-item">
-//                             <div className="buttons">
-//                                 <button onClick={navigateToProfile} className="button is-light">
-//                                     Hồ sơ
-//                                 </button>
-//                                 <button onClick={Logout} className="button is-light">
-//                                     Đăng xuất
-//                                 </button>
-//                             </div>
-//                         </div>
-//                     </div>
-//                 </div>
-//             </div>
-//         </nav>
-//     );
-// };
-
-// export default NavbarUser;
-
-
-
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -101,27 +5,26 @@ import { jwtDecode } from 'jwt-decode';
 
 const NavbarUser = () => {
     const [name, setName] = useState('');
-    const [categories, setCategories] = useState([]); // State to hold categories
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false); // State to control dropdown visibility
+    const [categories, setCategories] = useState([]);
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const navigate = useNavigate();
 
-    // Fetch user data and categories
     useEffect(() => {
+
         const token = localStorage.getItem('accessToken');
-        if (!token) {
-            navigate("/login");
-            return;
+        if (token) {
+            try {
+                const decodedToken = jwtDecode(token);
+                setName(decodedToken.name);
+                setIsLoggedIn(true);
+            } catch (error) {
+                console.error("Invalid token:", error);
+                setIsLoggedIn(false);
+            }
         }
 
-        try {
-            const decodedToken = jwtDecode(token);
-            setName(decodedToken.name);
-        } catch (error) {
-            console.error("Invalid token:", error);
-            navigate("/login");
-        }
 
-        // Fetch categories
         const fetchCategories = async () => {
             try {
                 const response = await axios.get('http://localhost:6868/categories');
@@ -132,13 +35,24 @@ const NavbarUser = () => {
         };
 
         fetchCategories();
-    }, [navigate]);
+    }, []);
+
+    const handleOrderHistoryClick = () => {
+        const token = localStorage.getItem('accessToken');
+        if (token) {
+            navigate('/lichsumuahang');
+        } else {
+            navigate('/login');
+        }
+    };
 
     const Logout = async () => {
         try {
             await axios.delete('http://localhost:6868/logout', { withCredentials: true });
             localStorage.removeItem('accessToken');
-            navigate("/login");
+            setIsLoggedIn(false);
+            setName('');
+            navigate("/");
         } catch (error) {
             console.error("Logout error:", error.response?.data || error.message);
         }
@@ -156,13 +70,13 @@ const NavbarUser = () => {
     };
 
     const handleCategoryClick = (categoryId) => {
-        navigate(`/categories/${categoryId}`); // Redirect to category page
-        setIsDropdownOpen(false); // Close dropdown after selection
+        navigate(`/categories/${categoryId}`);
+        setIsDropdownOpen(false);
     };
 
     return (
         <nav className="navbar is-light" role="navigation" aria-label="main navigation">
-            <div className='container'>
+            <div className="container">
                 <div className="navbar-brand">
                     <a className="navbar-item" href="#">
                         <img src="#" alt="LOGO" width="112" height="28" />
@@ -193,28 +107,37 @@ const NavbarUser = () => {
                         <a href='/sanpham' className="navbar-item">
                             Sản phẩm
                         </a>
-                        <a href='/donhang' className="navbar-item">
+                        <a className="navbar-item" onClick={handleOrderHistoryClick}>
                             Lịch sử mua hàng
                         </a>
                     </div>
 
                     <div className="navbar-end">
-                        <div className="navbar-item">
-                            <h1 className="title is-5" style={{ color: 'blue' }}>
-                                Xin chào, {name}!
-                            </h1>
-                        </div>
-
-                        <div className="navbar-item">
-                            <div className="buttons">
-                                <button onClick={navigateToProfile} className="button is-light">
-                                    Hồ sơ
-                                </button>
-                                <button onClick={Logout} className="button is-light">
-                                    Đăng xuất
+                        {isLoggedIn ? (
+                            <>
+                                <div className="navbar-item">
+                                    <h1 className="title is-5" style={{ color: 'blue' }}>
+                                        Xin chào, {name}!
+                                    </h1>
+                                </div>
+                                <div className="navbar-item">
+                                    <div className="buttons">
+                                        <button onClick={navigateToProfile} className="button is-light">
+                                            Hồ sơ
+                                        </button>
+                                        <button onClick={Logout} className="button is-light">
+                                            Đăng xuất
+                                        </button>
+                                    </div>
+                                </div>
+                            </>
+                        ) : (
+                            <div className="navbar-item">
+                                <button onClick={() => navigate('/login')} className="button is-primary">
+                                    Đăng nhập
                                 </button>
                             </div>
-                        </div>
+                        )}
                     </div>
                 </div>
             </div>
@@ -223,3 +146,4 @@ const NavbarUser = () => {
 };
 
 export default NavbarUser;
+

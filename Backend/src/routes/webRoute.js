@@ -20,10 +20,10 @@ router.delete('/users/:id', verifyToken, deleteUser);
 
 
 
-router.get('/categories', getCategories);  
-router.post('/categories', createCategory);  
+router.get('/categories', getCategories);
+router.post('/categories', createCategory);
 router.get('/categories/:id', getCategoryById);
-router.put('/categories/:id', verifyToken, updateCategory); 
-router.delete('/categories/:id', verifyToken, deleteCategory); 
+router.put('/categories/:id', verifyToken, updateCategory);
+router.delete('/categories/:id', verifyToken, deleteCategory);
 
 export default router;

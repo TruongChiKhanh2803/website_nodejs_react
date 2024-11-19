@@ -23,7 +23,7 @@ const EditProfile = () => {
                 const decodedToken = jwtDecode(token);
 
                 if (parseInt(decodedToken.userId) !== parseInt(id)) {
-                    navigate("/home");
+                    navigate("/");
                     return;
                 }
 
@@ -107,7 +107,7 @@ const EditProfile = () => {
                     <button type="submit" className="button is-success">
                         Cập nhật
                     </button>
-                    <span><a href="/home" className="has-text-link has-text ml-4">Quay lại</a></span>
+                    <span><a href="/" className="has-text-link has-text ml-4">Quay lại</a></span>
                 </div>
 
             </form>
