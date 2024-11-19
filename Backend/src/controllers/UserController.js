@@ -63,7 +63,7 @@ export const Login = async (req, res) => {
             maxAge: 24 * 60 * 60 * 1000,
         });
 
-        const redirectUrl = role === 0 ? "/dashboard" : "/home";
+        const redirectUrl = role === 0 ? "/dashboard" : "/";
         res.json({ accessToken, redirectUrl });
     } catch (error) {
         res.status(500).json({ msg: "Đã xảy ra lỗi!" });
@@ -102,9 +102,9 @@ export const getUserById = async (req, res) => {
 
 
 export const updateUser = async (req, res) => {
-    const { id } = req.params; 
-    const { name, email, password } = req.body; 
-    const userFromToken = req.user; 
+    const { id } = req.params;
+    const { name, email, password } = req.body;
+    const userFromToken = req.user;
 
     try {
         if (userFromToken.role !== 0 && parseInt(userFromToken.id) !== parseInt(id)) {
@@ -147,7 +147,7 @@ export const deleteUser = async (req, res) => {
 
 export const updateUserProfile = async (req, res) => {
     try {
-        const { id } = req.params; 
+        const { id } = req.params;
         const { name, email, password } = req.body;
 
         const userIdFromToken = req.user.userId;
@@ -156,7 +156,7 @@ export const updateUserProfile = async (req, res) => {
             return res.status(403).json({ msg: "Bạn chỉ có thể chỉnh sửa thông tin tài khoản của mình." });
         }
 
-        const user = await Users.findByPk(id); 
+        const user = await Users.findByPk(id);
         if (!user) {
             return res.status(404).json({ msg: "Không tìm thấy người dùng" });
         }
