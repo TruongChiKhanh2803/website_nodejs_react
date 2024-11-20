@@ -84,6 +84,11 @@ const NavbarUser = () => {
         navigate('/cart');
     };
 
+    const navigateToNews = () => {
+        navigate('/user/news');
+    };
+    
+
 
     return (
         <nav className="navbar is-light" role="navigation" aria-label="main navigation">
@@ -128,6 +133,10 @@ const NavbarUser = () => {
 
                         <a className="navbar-item" onClick={navigateToCart}>
                             Giỏ hàng
+                        </a>
+
+                        <a className="navbar-item"  onClick={navigateToNews}>
+                            Tin tức
                         </a>
                     </div>
 

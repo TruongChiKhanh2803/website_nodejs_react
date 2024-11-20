@@ -1,4 +1,4 @@
-import Users from "../models/userModel.js";
+import Users from "../models/UserModel.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
@@ -178,7 +178,3 @@ export const updateUserProfile = async (req, res) => {
         res.status(500).json({ msg: "Có lỗi xảy ra" });
     }
 };
-
-
-
-

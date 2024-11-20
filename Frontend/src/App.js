@@ -19,6 +19,10 @@ import CategoryList from './components/Category/Category';
 import CreateCategory from './components/Category/CreateCategory';
 import EditCategory from './components/Category/EditCategory';
 
+import DiscountList from './components/Discount/DiscountList';
+import AddDiscount from './components/Discount/AddDiscount';
+import EditDiscount from './components/Discount/EditDiscount';
+
 import ProductList from './components/Product/ProductList';
 import CreateProduct from './components/Product/ProductAdd';
 import EditProduct from './components/Product/ProductEdit';
@@ -27,6 +31,13 @@ import ProductDetail from './components/Client/ProductDetail';
 import Cart from './components/Client/Cart';
 import Order from './components/Client/Order';
 
+import News from './components/News/News';
+import AddNews from './components/News/AddNews';
+import EditNews from './components/News/EditNews';
+import ViewNews from './components/News/ViewNews';
+
+import NewsUser from './components/Client/News';
+import NewsDetail from './components/Client/NewDetail';
 
 import Footer from './components/Client/FooterUser';
 
@@ -44,6 +55,10 @@ const App = () => {
 
         <Route path="/cart" element={<><NavbarUser /><Cart /><Footer /></>} />
         <Route path="/order" element={<><NavbarUser /><Order /><Footer /></>} />
+        
+        <Route path="/user/news" element={<><NavbarUser /><NewsUser /><Footer /></>} />
+        <Route path="/user/news/:NewsID" element={<><NavbarUser /><NewsDetail /><Footer /></>} />
+
 
         <Route
           path="/dashboard"
@@ -129,6 +144,55 @@ const App = () => {
             </PrivateRoute>
           }
         />
+
+
+        <Route
+          path="/discounts"
+          element={
+            <PrivateRoute requiredRole={0}>
+              <><Navbar /><DiscountList /></>
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="/discounts/add"
+          element={
+            <PrivateRoute requiredRole={0}>
+              <AddDiscount />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/discounts/edit/:id"
+          element={
+            <PrivateRoute requiredRole={0}>
+              <EditDiscount />
+            </PrivateRoute>
+          }
+        />
+
+
+        <Route
+          path="/news"
+          element={<PrivateRoute requiredRole={0}>
+            <><Navbar /><News /></>
+          </PrivateRoute>} />
+        <Route
+          path="/news/view"
+          element={<PrivateRoute requiredRole={0}>
+            <><Navbar /><ViewNews /></>
+          </PrivateRoute>} />
+        <Route
+          path="/news/add"
+          element={<PrivateRoute requiredRole={0}>
+            <><Navbar /><AddNews /></>
+          </PrivateRoute>} />
+        <Route
+          path="/news/edit/:NewsID"
+          element={<PrivateRoute requiredRole={0}>
+            <EditNews />
+          </PrivateRoute>} />
 
 
       </Routes>

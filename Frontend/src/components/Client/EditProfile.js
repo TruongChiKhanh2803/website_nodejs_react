@@ -5,7 +5,7 @@ import { jwtDecode } from 'jwt-decode';
 
 const EditProfile = () => {
     const navigate = useNavigate();
-    const { id } = useParams(); 
+    const { id } = useParams();
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -43,7 +43,6 @@ const EditProfile = () => {
 
     const handleUpdate = async (e) => {
         e.preventDefault();
-
         try {
             const token = localStorage.getItem('accessToken');
             await axios.put(

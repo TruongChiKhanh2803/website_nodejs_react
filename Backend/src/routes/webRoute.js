@@ -6,6 +6,10 @@ import { getUsers, Register, Login, Logout, getUserById, updateUser, deleteUser,
 import { getCategories, createCategory, updateCategory, deleteCategory, getCategoryById } from "../controllers/CategoriesController.js";
 import { getProducts, createProduct, updateProduct, deleteProduct, getProductById } from "../controllers/ProductController.js";
 import { getTotalUsers, getTotalProducts, getTotalOrders } from "../controllers/StatsController.js";
+import { createDiscount, getDiscounts, getDiscountById, updateDiscount, deleteDiscount, } from '../controllers/DiscountController.js';
+
+import { getAllNews, getByNewsID, createNews, updateNews, deleteNews } from "../controllers/NewsController.js";
+
 
 const router = express.Router();
 
@@ -41,5 +45,23 @@ router.delete('/products/:id', verifyToken, deleteProduct);
 router.get('/stats/users', getTotalUsers);
 router.get('/stats/products', getTotalProducts);
 router.get('/stats/orders', getTotalOrders);
+
+
+
+router.get('/discounts', getDiscounts);
+router.post('/discounts', createDiscount);
+router.get('/discounts/:id', getDiscountById);
+router.put('/discounts/edit/:id', verifyToken, updateDiscount);
+router.delete('/discounts/:id', verifyToken, deleteDiscount);
+
+
+
+router.get('/news', getAllNews);
+router.get('/news/:NewsID', getByNewsID);
+router.post('/news', createNews);
+router.put('/news/edit/:NewsID', verifyToken, updateNews);
+router.delete('/news/:NewsID', verifyToken, deleteNews);
+
+
 
 export default router;
