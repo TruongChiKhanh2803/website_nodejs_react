@@ -5,6 +5,7 @@ import { refreshToken } from "../controllers/RefreshToken.js";
 import { getUsers, Register, Login, Logout, getUserById, updateUser, deleteUser, updateUserProfile } from "../controllers/UserController.js";
 import { getCategories, createCategory, updateCategory, deleteCategory, getCategoryById } from "../controllers/CategoriesController.js";
 import { getProducts, createProduct, updateProduct, deleteProduct, getProductById } from "../controllers/ProductController.js";
+import { getTotalUsers, getTotalProducts, getTotalOrders } from "../controllers/StatsController.js";
 
 const router = express.Router();
 
@@ -34,5 +35,11 @@ router.post('/products', createProduct);
 router.get('/products/:id', getProductById);
 router.put('/products/edit/:id', verifyToken, updateProduct);
 router.delete('/products/:id', verifyToken, deleteProduct);
+
+
+// Thống kê
+router.get('/stats/users', getTotalUsers);
+router.get('/stats/products', getTotalProducts);
+router.get('/stats/orders', getTotalOrders);
 
 export default router;

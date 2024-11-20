@@ -78,9 +78,6 @@ const App = () => {
           }
         />
 
-
-
-
         <Route
           path="/categories"
           element={

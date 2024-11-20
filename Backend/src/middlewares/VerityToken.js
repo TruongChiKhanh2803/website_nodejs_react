@@ -4,12 +4,12 @@ export const verifyToken = (req, res, next) => {
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];
 
-    if (!token) return res.status(401).json({ msg: "Unauthorized: Token is required" });
+    if (!token) return res.status(401).json({ msg: "Không được phép thực hiện!" });
 
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
-        if (err) return res.status(403).json({ msg: "Forbidden: Invalid token" });
+        if (err) return res.status(403).json({ msg: "Bị cấm!" });
 
-        req.user = decoded; 
+        req.user = decoded;
         next();
     });
 };
