@@ -13,6 +13,8 @@ import db from "./src/config/Database.js";
 // import News from "./src/models/NewsModel.js";
 
 import router from "./src/routes/webRoute.js"
+import multer from "multer";
+import path from "path";
 
 dotenv.config();
 const app = express();

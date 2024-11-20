@@ -9,10 +9,6 @@ const Products = db.define('products', {
         type: DataTypes.STRING,
         allowNull: false
     },
-    image: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
     description: {
         type: DataTypes.TEXT
     },
@@ -39,7 +35,6 @@ const Products = db.define('products', {
     freezeTableName: true
 });
 
-// Thiết lập mối quan hệ với Categories
 Categories.hasMany(Products, { foreignKey: 'categoryId' });
 Products.belongsTo(Categories, { foreignKey: 'categoryId' });
 

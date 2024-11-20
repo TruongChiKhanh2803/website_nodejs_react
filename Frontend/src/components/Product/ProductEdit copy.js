@@ -1,51 +1,94 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
-const AddProduct = () => {
+const EditProduct = () => {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
     const [stock, setStock] = useState('');
     const [categoryId, setCategoryId] = useState('');
-    const [image, setImage] = useState(null);
     const [msg, setMsg] = useState('');
     const [categories, setCategories] = useState([]);
+    const [token, setToken] = useState('');
+    const { id } = useParams(); // Get product ID from URL
     const navigate = useNavigate();
 
+    // Fetch categories data
     useEffect(() => {
+        const getCategories = async () => {
+            try {
+                const response = await axios.get('http://localhost:6868/categories');
+                setCategories(response.data);
+            } catch (error) {
+                console.error("Không tìm nạp được danh mục:", error);
+            }
+        };
+
         getCategories();
     }, []);
 
-    const getCategories = async () => {
+    // Fetch product data by ID
+    useEffect(() => {
+        const fetchProductData = async () => {
+            try {
+                const response = await axios.get(`http://localhost:6868/products/${id}`, {
+                    headers: { Authorization: `Bearer ${token}` }
+                });
+                const product = response.data;
+                setName(product.name);
+                setDescription(product.description);
+                setPrice(product.price);
+                setStock(product.stock);
+                setCategoryId(product.categoryId);
+            } catch (error) {
+                console.error("Không tìm thấy sản phẩm:", error);
+                setMsg("Sản phẩm không tồn tại");
+            }
+        };
+
+        if (token && id) {
+            fetchProductData();
+        }
+    }, [token, id]);
+
+    // Fetch new access token if needed
+    const refreshToken = async () => {
         try {
-            const response = await axios.get('http://localhost:6868/categories');
-            setCategories(response.data);
+            const response = await axios.get('http://localhost:6868/token');
+            setToken(response.data.accessToken);
         } catch (error) {
-            console.error("Không thể tải danh mục:", error);
+            navigate('/login');
         }
     };
 
-    const addProduct = async (e) => {
+    useEffect(() => {
+        refreshToken(); // Get token when the component mounts
+    }, []);
+
+    // Handle form submission to update product
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        const formData = new FormData();
-        formData.append('name', name);
-        formData.append('description', description);
-        formData.append('price', price);
-        formData.append('stock', stock);
-        formData.append('categoryId', categoryId);
-        formData.append('image', image); // Gửi file ảnh
 
         try {
-            await axios.post('http://localhost:6868/products', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
+            const updatedProduct = {
+                name,
+                description,
+                price,
+                stock,
+                categoryId
+            };
+
+            await axios.put(`http://localhost:6868/products/edit/${id}`, updatedProduct, {
+                headers: { Authorization: `Bearer ${token}` }
             });
-            navigate("/products");
+
+            navigate("/products"); // Redirect after successful update
         } catch (error) {
             if (error.response) {
-                setMsg(error.response.data.message || 'Đã xảy ra lỗi.');
+                setMsg(error.response.data.message);
+            } else {
+                setMsg("Đã có lỗi xảy ra khi cập nhật sản phẩm.");
             }
         }
     };
@@ -57,10 +100,9 @@ const AddProduct = () => {
                     <div className="container">
                         <div className="columns is-centered">
                             <div className="column is-4-desktop">
-                                <form onSubmit={addProduct} className="box">
+                                <form onSubmit={handleSubmit} className="box">
                                     <p className="has-text-centered has-text-danger">{msg}</p>
-
-                                    <h1 className="columns is-centered mt-2">Thêm sản phẩm</h1>
+                                    <h1 className="columns is-centered mt-2">Chỉnh sửa sản phẩm</h1>
 
                                     <div className="field mt-5">
                                         <label className="label">Tên sản phẩm</label>
@@ -137,19 +179,7 @@ const AddProduct = () => {
                                     </div>
 
                                     <div className="field mt-5">
-                                        <label className="label">Hình ảnh</label>
-                                        <div className="controls">
-                                            <input
-                                                type="file"
-                                                className="input"
-                                                onChange={(e) => setImage(e.target.files[0])}
-                                                required
-                                            />
-                                        </div>
-                                    </div>
-
-                                    <div className="field mt-5">
-                                        <button className="button is-success is-fullwidth">Lưu</button>
+                                        <button className="button is-success is-fullwidth">Cập nhật</button>
                                     </div>
 
                                     <div className="has-text-centered mt-4">
@@ -165,4 +195,4 @@ const AddProduct = () => {
     );
 };
 
-export default AddProduct;
+export default EditProduct;

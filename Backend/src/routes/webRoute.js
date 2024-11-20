@@ -1,4 +1,5 @@
 import express from "express";
+
 import { verifyToken } from "../middlewares/VerityToken.js";
 import { refreshToken } from "../controllers/RefreshToken.js";
 
@@ -7,8 +8,9 @@ import { getCategories, createCategory, updateCategory, deleteCategory, getCateg
 import { getProducts, createProduct, updateProduct, deleteProduct, getProductById } from "../controllers/ProductController.js";
 import { getTotalUsers, getTotalProducts, getTotalOrders } from "../controllers/StatsController.js";
 import { createDiscount, getDiscounts, getDiscountById, updateDiscount, deleteDiscount, } from '../controllers/DiscountController.js';
-
 import { getAllNews, getByNewsID, createNews, updateNews, deleteNews } from "../controllers/NewsController.js";
+
+import upload from "../middlewares/multer.js";
 
 
 const router = express.Router();
@@ -35,7 +37,7 @@ router.delete('/categories/:id', verifyToken, deleteCategory);
 
 
 router.get('/products', getProducts);
-router.post('/products', createProduct);
+router.post('/products',upload.single("image"), createProduct);
 router.get('/products/:id', getProductById);
 router.put('/products/edit/:id', verifyToken, updateProduct);
 router.delete('/products/:id', verifyToken, deleteProduct);
