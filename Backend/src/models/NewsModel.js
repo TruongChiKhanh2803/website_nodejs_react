@@ -10,14 +10,14 @@ const News = db.define('productnews', {
     },
     Title: {
         type: DataTypes.STRING,
-        allowNull: false, // Không được để trống
+        allowNull: false, 
     },
     Content: {
-        type: DataTypes.TEXT, // Đổi sang TEXT nếu nội dung dài
-        allowNull: false, // Không được để trống
+        type: DataTypes.TEXT, 
+        allowNull: false,
     },
 }, {
-    freezeTableName: true, // Tên bảng không bị đổi
+    freezeTableName: true, 
     // timestamps: false, 
 });
 

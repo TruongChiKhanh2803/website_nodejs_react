@@ -8,7 +8,6 @@ const AddProduct = () => {
     const [price, setPrice] = useState('');
     const [stock, setStock] = useState('');
     const [categoryId, setCategoryId] = useState('');
-    const [image, setImage] = useState(null);
     const [msg, setMsg] = useState('');
     const [categories, setCategories] = useState([]);
     const navigate = useNavigate();
@@ -22,30 +21,24 @@ const AddProduct = () => {
             const response = await axios.get('http://localhost:6868/categories');
             setCategories(response.data);
         } catch (error) {
-            console.error("Không thể tải danh mục:", error);
+            console.error("Không tìm nạp được danh mục:", error);
         }
     };
 
     const addProduct = async (e) => {
         e.preventDefault();
-        const formData = new FormData();
-        formData.append('name', name);
-        formData.append('description', description);
-        formData.append('price', price);
-        formData.append('stock', stock);
-        formData.append('categoryId', categoryId);
-        formData.append('image', image); // Gửi file ảnh
-
         try {
-            await axios.post('http://localhost:6868/products', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
+            await axios.post('http://localhost:6868/products', {
+                name: name,
+                description: description,
+                price: price,
+                stock: stock,
+                categoryId: categoryId
             });
             navigate("/products");
         } catch (error) {
             if (error.response) {
-                setMsg(error.response.data.message || 'Đã xảy ra lỗi.');
+                setMsg(error.response.data.message);
             }
         }
     };
@@ -58,7 +51,7 @@ const AddProduct = () => {
                         <div className="columns is-centered">
                             <div className="column is-4-desktop">
                                 <form onSubmit={addProduct} className="box">
-                                    <p className="has-text-centered has-text-danger">{msg}</p>
+                                    <p className="has-text-centered">{msg}</p>
 
                                     <h1 className="columns is-centered mt-2">Thêm sản phẩm</h1>
 
@@ -137,18 +130,6 @@ const AddProduct = () => {
                                     </div>
 
                                     <div className="field mt-5">
-                                        <label className="label">Hình ảnh</label>
-                                        <div className="controls">
-                                            <input
-                                                type="file"
-                                                className="input"
-                                                onChange={(e) => setImage(e.target.files[0])}
-                                                required
-                                            />
-                                        </div>
-                                    </div>
-
-                                    <div className="field mt-5">
                                         <button className="button is-success is-fullwidth">Lưu</button>
                                     </div>
 
@@ -166,3 +147,5 @@ const AddProduct = () => {
 };
 
 export default AddProduct;
+
+

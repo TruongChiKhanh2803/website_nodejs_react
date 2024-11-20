@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { FaShoppingCart } from 'react-icons/fa';
-
 import Footer from './FooterUser';
 
 const ProductPage = () => {
@@ -12,6 +11,9 @@ const ProductPage = () => {
     const [filteredProducts, setFilteredProducts] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
     const [sortOption, setSortOption] = useState('name_asc');
+
+    // const [cartItems, setCartItems] = useState([]);
+
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -70,8 +72,29 @@ const ProductPage = () => {
         setSortOption(e.target.value);
     };
 
-    const handleAddToCart = (productId) => {
-        console.log("Added product to cart with id:", productId);
+    // const handleAddToCart = (productId) => {
+    //     console.log("Added product to cart with id:", productId);
+    // };
+
+    const addToCart = (product) => {
+        const storedCart = JSON.parse(localStorage.getItem("cartItems")) || [];
+        const existingItem = storedCart.find((item) => item.id === product.id);
+
+        if (existingItem) {
+            // Tăng số lượng nếu sản phẩm đã có trong giỏ hàng
+            const updatedCart = storedCart.map((item) =>
+                item.id === product.id
+                    ? { ...item, quantity: item.quantity + 1 }
+                    : item
+            );
+            localStorage.setItem("cartItems", JSON.stringify(updatedCart));
+        } else {
+            // Thêm sản phẩm mới vào giỏ hàng
+            const updatedCart = [...storedCart, { ...product, quantity: 1 }];
+            localStorage.setItem("cartItems", JSON.stringify(updatedCart));
+        }
+
+        alert(`${product.name} đã được thêm vào giỏ hàng!`);
     };
 
     return (
@@ -139,19 +162,51 @@ const ProductPage = () => {
                             </div>
                         </div>
 
-                        {/* Display Products */}
+                        {/* Product Cards */}
                         <div className="columns is-multiline">
                             {filteredProducts.map(product => (
                                 <div key={product.id} className="column is-one-third">
-                                    <div className="card">
+                                    <div
+                                        className="card"
+                                        style={{
+                                            border: "1px solid #ddd",
+                                            borderRadius: "8px",
+                                            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+                                            display: "flex",
+                                            flexDirection: "column",
+                                            height: "100%",
+                                        }}
+                                    >
                                         <div className="card-image">
                                             <figure className="image is-4by3">
-                                                <img src={`http://localhost:6868/images/product/${product.image}`} alt={product.name} />
+                                                <img
+                                                    src={product.image}
+                                                    alt={product.name}
+                                                    style={{
+                                                        borderRadius: "8px 8px 0 0",
+                                                        objectFit: "cover",
+                                                        height: "200px",
+                                                    }}
+                                                />
                                             </figure>
                                         </div>
-                                        <div className="card-content">
-                                            <h3 className="title is-5">{product.name}</h3>
-                                            <p className="subtitle is-6">{product.price} VND</p>
+                                        <div className="card-content has-text-centered" style={{ flexGrow: 1 }}>
+                                            <h3
+                                                className="title is-5"
+                                                style={{
+                                                    color: "#424242",
+                                                    fontSize: "1rem",
+                                                    overflow: "hidden",
+                                                    textOverflow: "ellipsis",
+                                                    whiteSpace: "nowrap",
+                                                }}
+                                            >
+                                                {product.name}
+                                            </h3>
+                                            <p className="subtitle is-6" style={{ color: "#757575" }}>
+                                                {product.price.toLocaleString()} VND
+                                            </p>
+
                                             <div className="columns is-mobile is-vcentered">
                                                 <div className="column is-auto">
                                                     <button
@@ -166,7 +221,7 @@ const ProductPage = () => {
                                                     <button
                                                         className="button is-info"
                                                         style={{ width: '100%', padding: '0.70rem' }}
-                                                        onClick={() => handleAddToCart(product.id)}
+                                                        onClick={() => addToCart(product)}
                                                     >
                                                         <FaShoppingCart />
                                                     </button>
@@ -177,11 +232,29 @@ const ProductPage = () => {
                                 </div>
                             ))}
                         </div>
+
+                        <div className="pagination is-centered">
+
+                            <ul className="pagination-list">
+                                <li>
+                                    <button className="pagination-link is-current">1</button>
+                                </li>
+                                <li>
+                                    <button className="pagination-link">2</button>
+                                </li>
+                                <li>
+                                    <button className="pagination-link">3</button>
+                                </li>
+
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
     );
+
 };
 
 export default ProductPage;
