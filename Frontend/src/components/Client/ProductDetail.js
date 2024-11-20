@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
 const ProductDetail = () => {
-    const { productId } = useParams(); // Get the product ID from the URL
+    const { productId } = useParams();
     const [product, setProduct] = useState(null);
 
     useEffect(() => {
@@ -17,7 +17,7 @@ const ProductDetail = () => {
         };
 
         fetchProductDetail();
-    }, [productId]); // Re-run when the productId changes
+    }, [productId]); 
 
     if (!product) {
         return <p>Loading product details...</p>;
@@ -26,7 +26,6 @@ const ProductDetail = () => {
     return (
         <div className="container">
             <div className="columns is-centered">
-                {/* Product Image */}
                 <div className="column is-half-tablet is-one-third-desktop">
                     <div className="card">
                         <div className="card-image">
@@ -37,7 +36,6 @@ const ProductDetail = () => {
                     </div>
                 </div>
 
-                {/* Product Details */}
                 <div className="column is-half-tablet is-two-thirds-desktop">
                     <div className="card">
                         <div className="card-content">
@@ -46,7 +44,6 @@ const ProductDetail = () => {
 
 
 
-                            {/* Add to Cart & Buy Now buttons */}
                             <div className="columns is-mobile is-vcentered">
                                 <div className="column is-half">
                                     <button className="button is-primary is-fullwidth">
@@ -59,16 +56,13 @@ const ProductDetail = () => {
                                     </button>
                                 </div>
                             </div>
-                            {/* Product Description */}
                             <p className="content">{product.description}</p>
 
-                            {/* Optionally, you can add additional product details like ratings */}
                             <div className="content">
                                 <h4 className="subtitle is-6">Đặc điểm nổi bật</h4>
                                 <ul>
                                     <li><strong>Hãng:</strong> {product.category.name}</li>
                                     <li><strong>Màu sắc:</strong> {product.color}</li>
-                                    {/* Add any other details you wish to display */}
                                 </ul>
                             </div>
                         </div>

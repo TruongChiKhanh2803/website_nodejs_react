@@ -1,32 +1,41 @@
 # GET http://localhost:6868/users
-# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsIm5hbWUiOiJ1c2VyMCIsImVtYWlsIjoidXNlcjBAZ21haWwuY29tIiwiaWF0IjoxNzMxODE3Mzc5LCJleHAiOjE3MzE5MDM3Nzl9.ZpSBBFUAN18mZFJQD03EZeOqkunzjJC2Dj9ZhWC9BCA
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsIm5hbWUiOiJ1c2VyMSIsImVtYWlsIjoidXNlcjFAZ21haWwuY29tIiwicm9sZSI6MSwiaWF0IjoxNzMyMDI5MDIxLCJleHAiOjE3MzIwMjk2MjF9.hxjA76UAOYImWJMLq2n9KGJKYWQ61ACSg_qWV-fV4EA
 
+GET http://localhost:6868/token
 
-# --------------------------------
-
-POST http://localhost:6868/users
-Content-Type: application/json
-
-{
-    "name":"user1",
-    "email": "user1@gmail.com",
-    "password": "123456",
-    "confPassword": "123456"
-}
 
 # POST http://localhost:6868/login
 # Content-Type: application/json
 
 
 # {
-#     "email": "user0@gmail.com",
+#     "email": "user1@gmail.com",
 #     "password": "123456"
+# }
+# --------------------------------
+
+# POST http://localhost:6868/users
+# Content-Type: application/json
+
+# {
+#     "name":"user3",
+#     "email": "user3@gmail.com",
+#     "password": "123456",
+#     "confPassword": "123456"
 # }
 
 
 
 
-# GET http://localhost:6868/token
+
+
+
+# GET http://localhost:6868/stats/users
+
+# GET http://localhost:6868/stats/products
+
+# GET http://localhost:6868/stats/orders
+
 
 
 # DELETE http://localhost:6868/logout
