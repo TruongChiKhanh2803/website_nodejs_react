@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 19, 2024 at 05:57 AM
+-- Generation Time: Nov 20, 2024 at 07:17 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.3.6
 
@@ -99,7 +99,7 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `description`, `price`, `stock`, `categoryId`, `createdAt`, `updatedAt`) VALUES
-(2, 'Samsung Galaxy S23 FE 5G', 'Điện thoại Samsung Galaxy S23 FE 5G 8GB/128GB Xanh mint/Trắng', 10890000, 999, 7, '2024-11-19 03:24:36', '2024-11-19 04:52:26'),
+(2, 'Samsung Galaxy S23 FE 5G999999999999999999999999999999999999999999999999999999999', 'Điện thoại Samsung Galaxy S23 FE 5G 8GB/128GB Xanh mint/Trắng', 10890000, 999, 7, '2024-11-19 03:24:36', '2024-11-20 06:48:37'),
 (3, 'Samsung Galaxy S24 Ultra 5G', 'Điện thoại Samsung Galaxy S24 Ultra 5G 12GB/512GB', 33490000, 99, 7, '2024-11-19 03:34:34', '2024-11-19 04:53:06'),
 (4, 'iPhone 16 Pro Max', 'Điện thoại iPhone 16 Pro Max 256GB', 34490000, 99, 4, '2024-11-19 03:39:03', '2024-11-19 04:53:54'),
 (5, 'iPhone 15 Pro Max', 'Điện thoại iPhone 15 Pro Max 256GB', 29590000, 99, 4, '2024-11-19 03:39:16', '2024-11-19 04:54:30'),
@@ -127,9 +127,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `role`, `refresh_token`, `createdAt`, `updatedAt`) VALUES
-(1, 'admin', 'admin@gmail.com', '$2b$10$NZji7EngQ1lzFNatFhH1f.55UYl9yjGVpOrilru8Jkh.n1cvJ8t3u', 0, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsIm5hbWUiOiJhZG1pbiIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwicm9sZSI6MCwiaWF0IjoxNzMxOTkwNDUwLCJleHAiOjE3MzIwNzY4NTB9.bP5U2f6TXyWw_O4Lexu22LRCSMvP9a0hSLeSKGBevvw', '2024-11-18 09:31:59', '2024-11-19 04:27:30'),
-(2, 'user1', 'user1@gmail.com', '$2b$12$JH4poakZfeOheG0iU0VLX.zNlkxfIZmeSvf58/5JIc0Z1xRUwBqfW', 1, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsIm5hbWUiOiJ1c2VyMSIsImVtYWlsIjoidXNlcjFAZ21haWwuY29tIiwicm9sZSI6MSwiaWF0IjoxNzMxOTkxNjczLCJleHAiOjE3MzIwNzgwNzN9.AAsHIRwSPX9-3UybqrygK3ARpFffCU2WCMtqNJ4jPK8', '2024-11-18 09:32:26', '2024-11-19 04:47:53'),
-(3, 'user2', 'user2@gmail.com', '$2b$10$ZmKrkRGBPxLopjFC6sDl1OzBZ/6NdXDxqNdRO.8bIZ08NjiZ2N16W', 1, NULL, '2024-11-19 04:50:53', '2024-11-19 04:50:53');
+(1, 'admin', 'admin@gmail.com', '$2b$10$NZji7EngQ1lzFNatFhH1f.55UYl9yjGVpOrilru8Jkh.n1cvJ8t3u', 0, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsIm5hbWUiOiJhZG1pbiIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwicm9sZSI6MCwiaWF0IjoxNzMyMDI5Mzk2LCJleHAiOjE3MzIxMTU3OTZ9.uwSfkaXPS43eut101OjCuykNs2BfMQFuwnfJXVKCwP8', '2024-11-18 09:31:59', '2024-11-19 15:16:36'),
+(2, 'user1', 'user1@gmail.com', '$2b$12$JH4poakZfeOheG0iU0VLX.zNlkxfIZmeSvf58/5JIc0Z1xRUwBqfW', 1, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsIm5hbWUiOiJ1c2VyMSIsImVtYWlsIjoidXNlcjFAZ21haWwuY29tIiwicm9sZSI6MSwiaWF0IjoxNzMyMDgxMjMwLCJleHAiOjE3MzIxNjc2MzB9.Ctpjny0HB8mhFfvB7pOlmweosTfkbmzetv9V69NDk9k', '2024-11-18 09:32:26', '2024-11-20 05:40:30'),
+(3, 'user2', 'user2@gmail.com', '$2b$10$ZmKrkRGBPxLopjFC6sDl1OzBZ/6NdXDxqNdRO.8bIZ08NjiZ2N16W', 1, NULL, '2024-11-19 04:50:53', '2024-11-19 04:50:53'),
+(4, 'user3', 'user3@gmail.com', '$2b$10$N1MSrfCzIchBPmHhzE5jpuUBO.sFpmzo/O47d0pgkpA/V.AfqgsDG', 1, NULL, '2024-11-19 15:08:22', '2024-11-19 15:08:22'),
+(5, 'khanh', 'khanh@gmail.com', '$2b$10$TYZLW2dGNCDPJPyVAQ8jV.b5IYwO48uiFwgJEo0Mkfxj9v6QT1AH2', 1, NULL, '2024-11-19 15:30:47', '2024-11-19 15:31:03');
 
 --
 -- Indexes for dumped tables
@@ -177,7 +179,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `orders`
@@ -201,7 +203,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables

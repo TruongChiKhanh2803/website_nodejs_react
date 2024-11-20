@@ -47,9 +47,14 @@ const Navbar = () => {
                         <a href='/products' className="navbar-item">
                             Sản phẩm
                         </a>
-                        <a href='/donhang' className="navbar-item">
-                            Đơn hàng
+                        <a href='/discounts' className="navbar-item">
+                            Giảm giá
                         </a>
+
+                        <a href='/news' className="navbar-item">
+                            Tin Tức
+                        </a>
+
                     </div>
 
 
@@ -65,7 +70,7 @@ const Navbar = () => {
                     </div>
                 </div>
             </div>
-        </nav>
+        </nav >
     );
 }
 

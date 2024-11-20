@@ -9,6 +9,8 @@ import db from "./src/config/Database.js";
 // import Products from "./src/models/ProductsModel.js";
 // import Orders from "./src/models/OrdersModel.js";
 // import OrderDetail from "./src/models/OrderDetailsModel.js";
+// import Discounts from "./src/models/DiscountModel.js";
+// import News from "./src/models/NewsModel.js";
 
 import router from "./src/routes/webRoute.js"
 
@@ -25,6 +27,8 @@ try {
     // await Products.sync();
     // await Orders.sync();
     // await OrderDetail.sync();
+    // await Discounts.sync();
+    // await News.sync();
 } catch (error) {
     console.error(error);
 }

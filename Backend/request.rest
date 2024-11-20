@@ -26,10 +26,6 @@ GET http://localhost:6868/token
 
 
 
-
-
-
-
 # GET http://localhost:6868/stats/users
 
 # GET http://localhost:6868/stats/products
